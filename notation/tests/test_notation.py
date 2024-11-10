@@ -24,4 +24,4 @@ class TestNotation:
 
     def test_incorrect_number_of_nums(self):
         with pytest.raises(ValueError):
-            notation("3 + +")
+            notation("+ + 3")
