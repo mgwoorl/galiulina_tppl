@@ -39,58 +39,6 @@ class Parser():
             return result
         raise SyntaxError("Invalid factor")
 
-    # def program(self):
-    #     result = self.complex_statement()
-    #     self.__check_token(TokenType.DOT)
-    #
-    #     return result
-    #
-    # def complex_statement(self):
-    #     result = []
-    #     self.__check_token(TokenType.BEGIN)
-    #     statements = self.statement_list()
-    #     self.__check_token(TokenType.END)
-    #
-    #     for statement in statements:
-    #         result.append(statement)
-    #
-    #     return result
-    #
-    # def statement_list(self):
-    #     token = self._current_token
-    #     node = self.statement()
-    #
-    #     results = [node]
-    #
-    #     while token.type_ == TokenType.SEMI:
-    #         self.__check_token(TokenType.SEMI)
-    #         results.append(self.statement())
-    #
-    #     if token.type_ == TokenType.VARIABLE:
-    #         self.error()
-    #
-    #     return results
-    #
-    # def statement(self):
-    #     token = self._current_token
-    #     if token.type_ == TokenType.BEGIN:
-    #         node = self.complex_statement()
-    #     elif token.type_ == TokenType.VARIABLE:
-    #         node = self.assignment_statement()
-    #     else:
-    #         node = self.empty()
-    #     return node
-    #
-    # def assignment_statement(self):
-    #     left = self._current_token
-    #     self.__check_token(TokenType.VARIABLE)
-    #     op = self._current_token
-    #     self.__check_token(TokenType.ASSIGN)
-    #     right = self.__expr()
-    #     result = Assignment(left, op, right)
-    #
-    #     return result
-
     def __term(self) -> BinOp:
         result = self.__factor()
         while self._current_token and (self._current_token.type_ == TokenType.OPERATOR):
@@ -113,8 +61,6 @@ class Parser():
         return result
 
     def __expr(self) -> BinOp:
-        # self._lexer.init(s)
-        # self._current_token = self._lexer.next()
         result = self.__term()
 
         while self._current_token and (self._current_token.type_ == TokenType.OPERATOR):
@@ -180,8 +126,3 @@ class Parser():
         self._lexer.init(s)
         self._current_token = self._lexer.next()
         return self.__program()
-
-    # def eval(self, s: str) -> BinOp:
-    #     self._lexer.init(s)
-    #     self._current_token = self._lexer.next()
-    #     return self.__expr()
